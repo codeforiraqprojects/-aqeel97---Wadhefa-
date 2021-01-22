@@ -1,0 +1,25 @@
+{% extends 'postss/base.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+{% for work in works %}
+    <div class="work p-3 mb-3">
+        <img class="img-fluid rounded-circle border m-2" style="width: 120px; height: 120px; " src="{{ work.author.profile.image.url }}" alt="صوره الناشر">
+        <span class="text-secondary">نشر في {{work.work_date|date:"d-m-Y"}}</span>
+        <h3><a class=" text-dark" href="{% url 'detail' work.pk %}">{{work.title}}</a></h3>
+        <p>
+            {% if work.content|length > 300 %}
+            {{work.content|slice:'300'}} . . .
+            {% else %}
+            {{work.content}}
+            {% endif %}
+        </p>
+    </div>
+{% endfor %}
+{% include 'postss/pagination.html' with page=works %}
+{% endblock content %}

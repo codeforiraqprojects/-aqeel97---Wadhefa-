@@ -1,0 +1,15 @@
+{% extends 'postss/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="bordwr p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3 ">حذف وظيفة</legend>
+    <form method="POST">
+        <legend class="pb-1 mb-3 mt-4"> انت على وشك حذف "{{object.title}}" </legend>
+        <p>هل انت متاكد انك تريد الحذف ؟</p> 
+        {% csrf_token %}
+        <input class="btn btn-danger mt-3" type="submit" value="حذف">
+        <a class="btn btn-secondary mt-3 back-btn" href="{% url 'detail' object.id %}">تراجع</a>
+    </form>
+</div>
+{% endblock content %}

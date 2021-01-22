@@ -1,0 +1,23 @@
+{% extends 'postss/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="bordwr p-4 mb-5">
+    <legend class="border-bottom pb-1 mb-3 ">تسجيل الدخول</legend>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input class="btn btn-secondary mt-4" type="submit" value="تسجيل">
+    </form>
+    <div class="border-top mt-4 pt-2">
+        <small>اذا لم يكن لديك حساب فيمكنك <a href="{% url 'register' %}">التسجيل </a></small>
+    </div>
+</div>
+{% endblock content %}

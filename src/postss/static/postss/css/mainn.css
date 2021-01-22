@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Changa';
+    src: url('../fonts/Changa-Regular.ttf')  format("truetype"),
+         local('Changa');
+}
+
+html, body{
+    direction: rtl;
+    text-align: right;
+}
+
+body{
+    font-family: 'Changa', sans-serif;
+}
+
+.bg-secondary{
+    background-color: #235789 !important;
+}
+.bg-light{
+    background-color: #6d93b8 !important;
+}
+
+.work{
+    border: 1px solid #6d93b8;
+}
+
+.latest-work{
+    padding: 0 15px;
+}
+.latest-work .latest-work-item{
+    padding: 6px;
+}
+.latest-work li:first-child{
+    border-top: 0;
+}
+.latest-work li:last-child{
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.comment{
+    background-color: #d1dde7;
+    border: #6d93b8;
+}
+
+.btn-editing{
+    float: left;
+}
+
+.back-btn{
+    float: left;
+}

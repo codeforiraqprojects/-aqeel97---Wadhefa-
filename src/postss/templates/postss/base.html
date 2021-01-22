@@ -1,0 +1,121 @@
+{% load static %}
+{% load work_tag %}
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% if title %}
+        <title>وظيفتي | {{title}}</title>
+        {% else %}
+        <title>وظيفتي</title>
+        {% endif %}
+        <link rel="stylesheet" href="{% static 'postss/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'postss/css/mainn.css' %}">
+        <link rel="shortcut icon" href="{% static 'postss/images/wadhefa.png' %}">
+
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#"> وظيفة
+                        <img src="{% static 'postss/images/wadhefa.png' %}" alt="شعار وظيفة" width="30px">
+                    </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color:white">
+                  <ul class="navbar-nav" >
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{% url 'home' %}" style="color:white">الرئيسية <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'about' %}"style="color:white" >حول الموقع </a>
+                    </li>
+                  </ul>
+                  {% if user.is_authenticated == True %}
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'new_work' %}" style="color:white">اظافة عمل جديد</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}" style="color:white"> الملف الشخصي</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="color:white"> تسجيل الخروج</a></li>
+                  </ul>
+                  {% else %}
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="color:white"> تسجيل دخول</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" style="color:white"> تسجيل</a></li>
+                  </ul>
+                  {% endif %}
+                </div>
+            </nav>
+        </header>
+
+        <section>
+                <div class="container">
+                    <div class="row mt-4">
+                        <div class="col-md-8">
+                            {% block content %}
+    
+                            {% endblock content %}
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <div class="card mb-3">
+                                <h3 class="text-center bg-secondary text-light p-2">اخر الوظائف</h3>
+                                {% latest_work %}
+                                    
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        <footer class="bg-secondary">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card-group mt-3">
+                            <div class="card m-3">
+                                <h3 class="card-title text-center border-button p-2 m-3">من انا</h3>
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                    <img src="{% static 'postss/images/wadhefa.png' %}" alt="شعار مدونة" width="100px"></div>
+                                </div>
+                                <h3 style="text-align: center;">عقيل جبار نصر </h3>
+                                <p style="text-align: center;">احد اعضاء code for iraq<br>aqeel.jabbar@codeforiraq.org<br>07808215283 </p>
+                            </div>
+                            <div class="card m-3">
+                                    <img  src="{% static 'postss/images/logo.png' %}" alt="شعار مدونة" width="500px">
+                            </div>
+                            <div class="card m-3">
+                                    <h3 class="card-title text-center border-button p-2 m-3"> وسائل التواصل الاجتماعي</h3>
+                                    <h4 class="card-body text-center">
+                                       <a class="text-secondary" href=""> <i class="fab fa-facebook"></i></a>
+                                       <a class="text-secondary" href=""> <i class="fab fa-twitter"></i></a>
+                                       <a class="text-secondary" href=""> <i class="fab fa-instagram"></i></a>
+                                       <a class="text-secondary" href=""> <i class="fab fa-youtube"></i></a>
+                                       <a class="text-secondary" href=""> <i class="fab fa-telegram"></i></a>
+                                       <a class="text-secondary" href=""> <i class="fab fa-linkedin"></i></a>
+                                    </h4>
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="row p-2">
+                    <div class="col-md text-center">
+                        <small class="text-light">&copy; جميع الحقوق محفوظة</small>
+                    </div>
+                </div>
+            </div>
+            </footer>
+
+        <script src="{% static 'postss/js/jquery-3.3.1.slim.min.js' %}"></script>
+        <script src="{% static 'postss/js/popper.min.js' %}"></script>
+        <script src="{% static 'postss/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'postss/js/fontawesme-all.min.js' %}"></script>
+
+    </body>
+</htm>

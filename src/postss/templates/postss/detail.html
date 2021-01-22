@@ -1,0 +1,56 @@
+{% extends 'postss/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}}">
+    {{message}}
+</div>
+{% endfor %}
+{% endif %}
+    <div class="border p-3 mb-3">
+        <img class="img-fluid rounded-circle border m-2" width="70px" src="{{ work.author.profile.image.url }}" alt="صوره الناشر">
+        <span class="text-secondary">نشر في {{work.work_date|date:"d-m-Y"}}</span>
+        {% if work.author == user %}
+        <div class="form-group btn-editing">
+            <a href="{% url 'work-update' work.id %}" class="btn btn-secondary">تحرير</a>
+            <a href="{% url 'work-delete' work.id %}" class="btn btn-danger">حذف</a>    
+        </div>
+        {% endif %}
+        <h3><a>{{work.title}}</a></h3>
+        <p>{{work.content}}</p>
+    </div>
+    {% if work.author == user %}
+    <div>
+        <h2 class="border-bottom mt-5 mb-3"> المتقدمين على الوظيفة ({{comments.count}})</h2>
+        {% if comments %}
+        {% for comment in comments %}
+        <div class="mb-3 p-3 comment">
+            <h6 class="border-bottom p-2">اسم المتقدم : {{comment.name}}</h6>
+            <p class="mb-0">البريد الالكتروني : {{ comment.email }}</p>
+            <p class="mb-0">رقم الهاتف : {{comment.number}}</p>
+            <p class="mb-0">الجنس : {{comment.gender}}</p>
+            <p class="mb-0">السيرة الذاتية : <a href="{{ comment.cv.url }}">{{comment.cv}}</a></p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="text-center mb-3 p-4 comment">
+            <h5 class="mb-0">لايوجد متقدمين على وظيفة</h5>
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {% if user.is_authenticated == False %}
+    <div>
+        <h3 class="border-bottom pb-3 mb-3 mt-5">تقديم على الوظيفة</h3>
+        <div class="bordwr p-4 mb-5 mt-4">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{comment_form|crispy}}
+                <input class="btn btn-secondary" type="submit" value="تقديم">
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}

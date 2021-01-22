@@ -1,0 +1,7 @@
+<ul class="list-group-flush latest-work">
+    {% for work in l_work %}
+        <li class="list-group-item latest-work-item">
+            <a class="text-dark" href="{% url 'detail' work.pk %}">{{work.title}}</a>
+        </li>
+    {% endfor %}
+</ul>
